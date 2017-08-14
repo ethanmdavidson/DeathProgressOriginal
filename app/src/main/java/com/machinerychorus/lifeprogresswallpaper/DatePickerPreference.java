@@ -50,7 +50,7 @@ public class DatePickerPreference extends DialogPreference {
         super.onDialogClosed(positiveResult);
 
         if (positiveResult) {
-            lastDate = new LocalDate(picker.getYear(), picker.getMonth(), picker.getDayOfMonth());
+            lastDate = new LocalDate(picker.getYear(), picker.getMonth(), picker.getDayOfMonth()-1);
             persistString(lastDate.toString());
         }
     }

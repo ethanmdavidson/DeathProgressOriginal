@@ -4,8 +4,12 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.preference.PreferenceManager;
 import android.service.wallpaper.WallpaperService;
 import android.view.SurfaceHolder;
+
+import org.joda.time.Days;
+import org.joda.time.LocalDate;
 
 public class LifeWallpaper extends WallpaperService {
 	Context context;
@@ -31,7 +35,7 @@ public class LifeWallpaper extends WallpaperService {
 			drawFrame();
 
 		}
-		
+
 		@Override
 		public void onVisibilityChanged(boolean visible) {
 			if (visible) {
@@ -57,16 +61,27 @@ public class LifeWallpaper extends WallpaperService {
 			try {
 				canvas = holder.lockCanvas();  //get the canvas
 				if (canvas != null) {
-					Paint paint = new Paint();
-					paint.setColor(Color.parseColor("blue"));
+                    LocalDate birthdate = LocalDate.parse(PreferenceManager.getDefaultSharedPreferences(context).getString("birthdate", ""));
+                    LocalDate curdate = new LocalDate();
 
-					//paint.setAlpha(250);
-					paint.setStyle(Paint.Style.FILL);
+                    LocalDate deathdate = birthdate.plusYears(90);
+
+                    float percentDead = ((float)Days.daysBetween(birthdate, curdate).getDays()) /
+							((float)Days.daysBetween(birthdate, deathdate).getDays());
+
+					Paint paint = new Paint();
+                    paint.setStyle(Paint.Style.FILL);
+
+					paint.setColor(Color.parseColor("blue"));
 					canvas.drawRect(0, 0, getDesiredMinimumWidth(), getDesiredMinimumHeight(), paint);//draw rect to clear the canvas
+
+                    paint.setColor(Color.parseColor("red"));
+                    canvas.drawRect(0, 0, getDesiredMinimumWidth(), (int)(getDesiredMinimumHeight()*percentDead), paint);
 				}
 			} finally {
-				if (canvas != null)
-					holder.unlockCanvasAndPost(canvas);
+				if (canvas != null) {
+                    holder.unlockCanvasAndPost(canvas);
+                }
 			}
 		}
 	}
