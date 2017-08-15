@@ -41,7 +41,8 @@ public class DatePickerPreference extends DialogPreference {
         super.onBindDialogView(v);
 
         if(lastDate != null) {
-            picker.updateDate(lastDate.getYear(), lastDate.getMonthOfYear(), lastDate.getDayOfMonth());
+            //need to -1/+1 the month because the picker uses 0-11 and jodatime uses 1-12
+            picker.updateDate(lastDate.getYear(), lastDate.getMonthOfYear()-1, lastDate.getDayOfMonth());
         }
     }
 
@@ -50,13 +51,13 @@ public class DatePickerPreference extends DialogPreference {
         super.onDialogClosed(positiveResult);
 
         if (positiveResult) {
-            lastDate = new LocalDate(picker.getYear(), picker.getMonth(), picker.getDayOfMonth()-1);
+            lastDate = new LocalDate(picker.getYear(), picker.getMonth()+1, picker.getDayOfMonth());
             persistString(lastDate.toString());
         }
     }
 
     @Override
     protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
-        lastDate=(restoreValue ? LocalDate.parse(getPersistedString("")) : new LocalDate());
+        lastDate=(restoreValue ? LocalDate.parse(getPersistedString("1994")) : new LocalDate());
     }
 }
