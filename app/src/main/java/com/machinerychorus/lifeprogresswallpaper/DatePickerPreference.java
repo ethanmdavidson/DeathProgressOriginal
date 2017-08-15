@@ -17,10 +17,6 @@ public class DatePickerPreference extends DialogPreference {
     private DatePicker picker;
     private LocalDate lastDate;
 
-    public DatePickerPreference(Context context) {
-        super(context);
-    }
-
     public DatePickerPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
     }

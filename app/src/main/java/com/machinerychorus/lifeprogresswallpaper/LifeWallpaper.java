@@ -10,14 +10,16 @@ import android.view.SurfaceHolder;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
-import org.joda.time.Days;
-import org.joda.time.LocalDate;
+import org.joda.time.DateTime;
+import org.joda.time.Hours;
 
 import java.util.Locale;
 
 public class LifeWallpaper extends WallpaperService {
-	//only draw every 24 hours, because we only keep dates to day precision anyway
-	private static final int MIN_TIME_BETWEEN_DRAWS_MS = 86400000;
+	//only draw every hour, in order to keep battery usage down.
+	//Users would be able to see it move every 10 minutes with like 6 digits precision
+	//so it might be cool to have it increase draw rate as precision increases
+	private static final int MIN_TIME_BETWEEN_DRAWS_MS = 3600000;
 
 	public LifeWallpaper() {
 	}
@@ -74,10 +76,10 @@ public class LifeWallpaper extends WallpaperService {
 				canvas = getSurfaceHolder().lockCanvas();
 				if (canvas != null) {
 					SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                    LocalDate birthdate = LocalDate.parse(pref.getString(getString(R.string.birthdateKey), "1994"));
+                    DateTime birthdate = DateTime.parse(pref.getString(getString(R.string.birthdateKey), "1994"));
 
-                    float percentDead = ((float)Days.daysBetween(birthdate, new LocalDate()).getDays()) /
-							((float)Days.daysBetween(birthdate, birthdate.plusYears(Integer.parseInt(pref.getString(getString(R.string.expectancyKey), "85")))).getDays());
+                    float percentDead = ((float) Hours.hoursBetween(birthdate, new DateTime()).getHours()) /
+							((float)Hours.hoursBetween(birthdate, birthdate.plusYears(Integer.parseInt(pref.getString(getString(R.string.expectancyKey), "85")))).getHours());
 
 					Paint paint = new Paint();
                     paint.setStyle(Paint.Style.FILL);
