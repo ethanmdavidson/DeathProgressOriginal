@@ -21,9 +21,9 @@
     <com.machinerychorus.lifeprogresswallpaper.IntegerPreference
         android:key="@string/textSizeKey"
         android:title="Text Size"
-        android:defaultValue="256"/>
+        android:defaultValue="240"/>
     <com.machinerychorus.lifeprogresswallpaper.IntegerPreference
         android:key="@string/decimalsKey"
         android:title="Decimal Places"
-        android:defaultValue="3"/>
+        android:defaultValue="4"/>
 </PreferenceScreen>

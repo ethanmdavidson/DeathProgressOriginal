@@ -84,14 +84,14 @@ public class LifeWallpaper extends WallpaperService {
 					Paint paint = new Paint();
                     paint.setStyle(Paint.Style.FILL);
 
-					paint.setColor(pref.getInt(getString(R.string.bgColorKey), Color.BLUE));
+					paint.setColor(pref.getInt(getString(R.string.bgColorKey), getColor(R.color.orangeLikeASpoopyPumpkin)));
 					canvas.drawRect(0, 0, getDesiredMinimumWidth(), getDesiredMinimumHeight(), paint);
 
-                    paint.setColor(pref.getInt(getString(R.string.fgColorKey), Color.BLACK));
+                    paint.setColor(pref.getInt(getString(R.string.fgColorKey), getColor(R.color.blackAsMySOUUUUUUUULLLL)));
                     canvas.drawRect(0, getDesiredMinimumHeight()-(int)(getDesiredMinimumHeight()*percentDead), getDesiredMinimumWidth(), getDesiredMinimumHeight(), paint);
 
-					paint.setTextSize(Float.parseFloat(pref.getString(getString(R.string.textSizeKey), "256")));
-					canvas.drawText(String.format(Locale.US, "%."+pref.getString(getString(R.string.decimalsKey), "3")+"f%%",percentDead*100f), 10, getDesiredMinimumHeight()-(int)(getDesiredMinimumHeight()*percentDead)-10, paint);
+					paint.setTextSize(Float.parseFloat(pref.getString(getString(R.string.textSizeKey), "240")));
+					canvas.drawText(String.format(Locale.US, "%."+pref.getString(getString(R.string.decimalsKey), "4")+"f%%",percentDead*100f), 10, getDesiredMinimumHeight()-(int)(getDesiredMinimumHeight()*percentDead)-10, paint);
 				}
 				lastDrawTime = System.currentTimeMillis();
 			} finally {
