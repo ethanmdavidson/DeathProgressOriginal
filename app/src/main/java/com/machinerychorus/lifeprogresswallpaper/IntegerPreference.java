@@ -12,24 +12,20 @@ import android.widget.Toast;
  */
 
 public class IntegerPreference extends EditTextPreference {
-    private Context context;
 
     public IntegerPreference(Context context) {
         super(context);
-        this.context = context;
     }
 
     public IntegerPreference(Context context, AttributeSet attributeSet){
         super(context, attributeSet);
-        this.context = context;
     }
 
     @Override
     public void setText(String text){
         boolean isValid = false;
         try {
-            int value = Integer.parseInt(text);
-            if(value >= 0){
+            if(Integer.parseInt(text) >= 0){
                 isValid = true;
             }
         } catch (NumberFormatException e){}
@@ -38,7 +34,7 @@ public class IntegerPreference extends EditTextPreference {
             super.setText(text);
         } else {
             //alert user that it wasn't changed
-            Toast toast = Toast.makeText(context, "Only positive numbers are allowed in this field", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(getContext(), "Only positive numbers are allowed in this field", Toast.LENGTH_SHORT);
             toast.show();
         }
     }

@@ -6,4 +6,5 @@
     <string name="fgColorKey">fgColor</string>
     <string name="expectancyKey">expectancy</string>
     <string name="textSizeKey">textSize</string>
+    <string name="decimalsKey">decimals</string>
 </resources>
