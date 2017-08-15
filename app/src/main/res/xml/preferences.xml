@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="Death Progress Wallpaper Settings"/>
     <com.machinerychorus.lifeprogresswallpaper.DatePickerPreference
         android:key="@string/birthdateKey"
         android:title="Birth Date"
