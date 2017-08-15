@@ -44,12 +44,11 @@ public class LifeWallpaper extends WallpaperService {
 
 		void drawFrame()
 		{
-			//getting the surface holder
 			final SurfaceHolder holder = getSurfaceHolder();
 
-			Canvas canvas = null;  // canvas
+			Canvas canvas = null;
 			try {
-				canvas = holder.lockCanvas();  //get the canvas
+				canvas = holder.lockCanvas();
 				if (canvas != null) {
                     LocalDate birthdate = LocalDate.parse(PreferenceManager.getDefaultSharedPreferences(context).getString(getString(R.string.birthdateKey), "1994"));
 
@@ -60,7 +59,7 @@ public class LifeWallpaper extends WallpaperService {
                     paint.setStyle(Paint.Style.FILL);
 
 					paint.setColor(PreferenceManager.getDefaultSharedPreferences(context).getInt(getString(R.string.bgColorKey), Color.BLUE));
-					canvas.drawRect(0, 0, getDesiredMinimumWidth(), getDesiredMinimumHeight(), paint);//draw rect to clear the canvas
+					canvas.drawRect(0, 0, getDesiredMinimumWidth(), getDesiredMinimumHeight(), paint);
 
                     paint.setColor(PreferenceManager.getDefaultSharedPreferences(context).getInt(getString(R.string.fgColorKey), Color.RED));
                     canvas.drawRect(0, getDesiredMinimumHeight()-(int)(getDesiredMinimumHeight()*percentDead), getDesiredMinimumWidth(), getDesiredMinimumHeight(), paint);
