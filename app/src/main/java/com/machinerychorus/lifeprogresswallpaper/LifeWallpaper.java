@@ -51,7 +51,7 @@ public class LifeWallpaper extends WallpaperService {
 			try {
 				canvas = holder.lockCanvas();  //get the canvas
 				if (canvas != null) {
-                    LocalDate birthdate = LocalDate.parse(PreferenceManager.getDefaultSharedPreferences(context).getString(getString(R.string.birthdateKey), ""));
+                    LocalDate birthdate = LocalDate.parse(PreferenceManager.getDefaultSharedPreferences(context).getString(getString(R.string.birthdateKey), "1994"));
 
                     float percentDead = ((float)Days.daysBetween(birthdate, new LocalDate()).getDays()) /
 							((float)Days.daysBetween(birthdate, birthdate.plusYears(90)).getDays());
