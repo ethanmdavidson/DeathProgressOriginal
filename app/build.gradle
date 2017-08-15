@@ -29,6 +29,6 @@ dependencies {
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.android.support:support-vector-drawable:25.3.1'
     compile 'net.danlew:android.joda:2.9.9'
-    compile 'com.github.kizitonwose.colorpreference:core:1.0.3'
+    compile 'com.jrummyapps:colorpicker:2.1.6'
     testCompile 'junit:junit:4.12'
 }

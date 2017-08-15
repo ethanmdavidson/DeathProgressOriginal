@@ -4,11 +4,11 @@
         android:key="@string/birthdateKey"
         android:title="Birth Date"
         android:defaultValue="1994"/>
-    <com.kizitonwose.colorpreference.ColorPreference
+    <com.jrummyapps.android.colorpicker.ColorPreference
         android:defaultValue="@color/colorPrimary"
         android:title="Background Color"
         android:key="@string/bgColorKey" />
-    <com.kizitonwose.colorpreference.ColorPreference
+    <com.jrummyapps.android.colorpicker.ColorPreference
         android:defaultValue="@color/colorAccent"
         android:title="Foreground Color"
         android:key="@string/fgColorKey" />

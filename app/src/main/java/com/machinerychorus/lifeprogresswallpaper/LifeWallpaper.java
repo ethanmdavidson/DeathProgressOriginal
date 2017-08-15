@@ -8,6 +8,8 @@ import android.preference.PreferenceManager;
 import android.service.wallpaper.WallpaperService;
 import android.view.SurfaceHolder;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
 
@@ -22,6 +24,7 @@ public class LifeWallpaper extends WallpaperService {
 	@Override
 	public Engine onCreateEngine() {
 		context = this;
+		JodaTimeAndroid.init(context);
 		return new WallpaperEngine();
 	}
 
@@ -30,15 +33,7 @@ public class LifeWallpaper extends WallpaperService {
 		@Override
 		public void onSurfaceCreated(SurfaceHolder holder) {
 			super.onSurfaceCreated(holder);
-
 			drawFrame();
-		}
-
-		@Override
-		public void onVisibilityChanged(boolean visible) {
-			if (visible) {
-				drawFrame();
-			}
 		}
 
 		//called when surface destroyed
