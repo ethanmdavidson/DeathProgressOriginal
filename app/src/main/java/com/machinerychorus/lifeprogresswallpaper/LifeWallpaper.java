@@ -11,6 +11,8 @@ import android.view.SurfaceHolder;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
 
+import java.util.Locale;
+
 public class LifeWallpaper extends WallpaperService {
 	Context context;
 
@@ -25,24 +27,17 @@ public class LifeWallpaper extends WallpaperService {
 
 	public class WallpaperEngine extends Engine{
 
-		//Called when the surface is created
 		@Override
 		public void onSurfaceCreated(SurfaceHolder holder) {
 			super.onSurfaceCreated(holder);
 
-			//call the draw method
-			// this is where you must call your draw code
 			drawFrame();
-
 		}
 
 		@Override
 		public void onVisibilityChanged(boolean visible) {
 			if (visible) {
-
-				//call the drawFunction
 				drawFrame();
-
 			}
 		}
 
@@ -52,7 +47,7 @@ public class LifeWallpaper extends WallpaperService {
 			super.onSurfaceDestroyed(holder);
 		}
 
-		public void drawFrame()
+		void drawFrame()
 		{
 			//getting the surface holder
 			final SurfaceHolder holder = getSurfaceHolder();
@@ -61,22 +56,22 @@ public class LifeWallpaper extends WallpaperService {
 			try {
 				canvas = holder.lockCanvas();  //get the canvas
 				if (canvas != null) {
-                    LocalDate birthdate = LocalDate.parse(PreferenceManager.getDefaultSharedPreferences(context).getString("birthdate", ""));
-                    LocalDate curdate = new LocalDate();
+                    LocalDate birthdate = LocalDate.parse(PreferenceManager.getDefaultSharedPreferences(context).getString(getString(R.string.birthdateKey), ""));
 
-                    LocalDate deathdate = birthdate.plusYears(90);
-
-                    float percentDead = ((float)Days.daysBetween(birthdate, curdate).getDays()) /
-							((float)Days.daysBetween(birthdate, deathdate).getDays());
+                    float percentDead = ((float)Days.daysBetween(birthdate, new LocalDate()).getDays()) /
+							((float)Days.daysBetween(birthdate, birthdate.plusYears(90)).getDays());
 
 					Paint paint = new Paint();
                     paint.setStyle(Paint.Style.FILL);
 
-					paint.setColor(Color.parseColor("blue"));
+					paint.setColor(PreferenceManager.getDefaultSharedPreferences(context).getInt(getString(R.string.bgColorKey), Color.BLUE));
 					canvas.drawRect(0, 0, getDesiredMinimumWidth(), getDesiredMinimumHeight(), paint);//draw rect to clear the canvas
 
-                    paint.setColor(Color.parseColor("red"));
-                    canvas.drawRect(0, 0, getDesiredMinimumWidth(), (int)(getDesiredMinimumHeight()*percentDead), paint);
+                    paint.setColor(PreferenceManager.getDefaultSharedPreferences(context).getInt(getString(R.string.fgColorKey), Color.RED));
+                    canvas.drawRect(0, getDesiredMinimumHeight()-(int)(getDesiredMinimumHeight()*percentDead), getDesiredMinimumWidth(), getDesiredMinimumHeight(), paint);
+
+					paint.setTextSize(48f);
+					canvas.drawText(String.format(Locale.US, "%.2f%%",percentDead*100f), 10, getDesiredMinimumHeight()-(int)(getDesiredMinimumHeight()*percentDead)-10, paint);
 				}
 			} finally {
 				if (canvas != null) {
