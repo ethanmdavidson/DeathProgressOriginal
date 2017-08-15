@@ -4,6 +4,10 @@
         android:key="@string/birthdateKey"
         android:title="Birth Date"
         android:defaultValue="1994"/>
+    <com.machinerychorus.lifeprogresswallpaper.IntegerPreference
+        android:key="@string/expectancyKey"
+        android:title="Life Expectancy"
+        android:defaultValue="85"/>
     <com.jrummyapps.android.colorpicker.ColorPreference
         android:defaultValue="@color/colorPrimary"
         android:title="Background Color"
@@ -12,4 +16,8 @@
         android:defaultValue="@color/colorAccent"
         android:title="Foreground Color"
         android:key="@string/fgColorKey" />
+    <com.machinerychorus.lifeprogresswallpaper.IntegerPreference
+        android:key="@string/textSizeKey"
+        android:title="Text Size"
+        android:defaultValue="256"/>
 </PreferenceScreen>

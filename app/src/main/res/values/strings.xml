@@ -4,4 +4,6 @@
     <string name="birthdateKey">birthdate</string>
     <string name="bgColorKey">bgColor</string>
     <string name="fgColorKey">fgColor</string>
+    <string name="expectancyKey">expectancy</string>
+    <string name="textSizeKey">textSize</string>
 </resources>

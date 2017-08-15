@@ -54,7 +54,7 @@ public class LifeWallpaper extends WallpaperService {
                     LocalDate birthdate = LocalDate.parse(PreferenceManager.getDefaultSharedPreferences(context).getString(getString(R.string.birthdateKey), "1994"));
 
                     float percentDead = ((float)Days.daysBetween(birthdate, new LocalDate()).getDays()) /
-							((float)Days.daysBetween(birthdate, birthdate.plusYears(90)).getDays());
+							((float)Days.daysBetween(birthdate, birthdate.plusYears(Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(context).getString(getString(R.string.expectancyKey), "85")))).getDays());
 
 					Paint paint = new Paint();
                     paint.setStyle(Paint.Style.FILL);
@@ -65,7 +65,7 @@ public class LifeWallpaper extends WallpaperService {
                     paint.setColor(PreferenceManager.getDefaultSharedPreferences(context).getInt(getString(R.string.fgColorKey), Color.RED));
                     canvas.drawRect(0, getDesiredMinimumHeight()-(int)(getDesiredMinimumHeight()*percentDead), getDesiredMinimumWidth(), getDesiredMinimumHeight(), paint);
 
-					paint.setTextSize(48f);
+					paint.setTextSize(Float.parseFloat(PreferenceManager.getDefaultSharedPreferences(context).getString(getString(R.string.textSizeKey), "256")));
 					canvas.drawText(String.format(Locale.US, "%.2f%%",percentDead*100f), 10, getDesiredMinimumHeight()-(int)(getDesiredMinimumHeight()*percentDead)-10, paint);
 				}
 			} finally {
