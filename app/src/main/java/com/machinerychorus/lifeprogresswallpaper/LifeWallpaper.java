@@ -1,11 +1,13 @@
 package com.machinerychorus.lifeprogresswallpaper;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.preference.PreferenceManager;
 import android.service.wallpaper.WallpaperService;
+import android.util.Log;
 import android.view.SurfaceHolder;
 
 import net.danlew.android.joda.JodaTimeAndroid;
@@ -29,17 +31,29 @@ public class LifeWallpaper extends WallpaperService {
 		return new WallpaperEngine();
 	}
 
-	public class WallpaperEngine extends Engine {
+	public class WallpaperEngine extends Engine implements SharedPreferences.OnSharedPreferenceChangeListener {
+		private SharedPreferences preferences;
+
+		public WallpaperEngine(){
+			preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+			preferences.registerOnSharedPreferenceChangeListener(this);
+		}
 
 		@Override
 		public void onSurfaceCreated(SurfaceHolder holder) {
 			super.onSurfaceCreated(holder);
+			Log.i("DeathWallpaper", "called onSurfaceCreated");
 			drawFrame();
 		}
 
 		@Override
 		public void onSurfaceDestroyed(SurfaceHolder holder) {
 			super.onSurfaceDestroyed(holder);
+			Log.i("DeathWallpaper", "called onSurfaceDestroyed");
+		}
+
+		public void onSurfaceRedrawNeeded(SurfaceHolder holder) {
+			Log.i("DeathWallpaper", "called onSurfaceRedrawNeeded");
 		}
 
 		void drawFrame()
@@ -65,7 +79,7 @@ public class LifeWallpaper extends WallpaperService {
                     canvas.drawRect(0, getDesiredMinimumHeight()-(int)(getDesiredMinimumHeight()*percentDead), getDesiredMinimumWidth(), getDesiredMinimumHeight(), paint);
 
 					paint.setTextSize(Float.parseFloat(PreferenceManager.getDefaultSharedPreferences(context).getString(getString(R.string.textSizeKey), "256")));
-					canvas.drawText(String.format(Locale.US, "%.2f%%",percentDead*100f), 10, getDesiredMinimumHeight()-(int)(getDesiredMinimumHeight()*percentDead)-10, paint);
+					canvas.drawText(String.format(Locale.US, "%.3f%%",percentDead*100f), 10, getDesiredMinimumHeight()-(int)(getDesiredMinimumHeight()*percentDead)-10, paint);
 				}
 			} finally {
 				if (canvas != null) {
@@ -73,7 +87,11 @@ public class LifeWallpaper extends WallpaperService {
                 }
 			}
 		}
+
+		@Override
+		public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+			Log.i("DeathWallpaper", "called onSharedPreferenceChanged");
+			drawFrame();
+		}
 	}
-
-
 }
