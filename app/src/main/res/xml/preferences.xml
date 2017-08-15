@@ -11,11 +11,11 @@
         android:title="Life Expectancy"
         android:defaultValue="85"/>
     <com.jrummyapps.android.colorpicker.ColorPreference
-        android:defaultValue="@color/colorPrimary"
+        android:defaultValue="@color/orangeLikeASpoopyPumpkin"
         android:title="Background Color"
         android:key="@string/bgColorKey" />
     <com.jrummyapps.android.colorpicker.ColorPreference
-        android:defaultValue="@color/colorAccent"
+        android:defaultValue="@color/blackAsMySOUUUUUUUULLLL"
         android:title="Foreground Color"
         android:key="@string/fgColorKey" />
     <com.machinerychorus.lifeprogresswallpaper.IntegerPreference

@@ -61,22 +61,23 @@ public class LifeWallpaper extends WallpaperService {
 			try {
 				canvas = getSurfaceHolder().lockCanvas();
 				if (canvas != null) {
-                    LocalDate birthdate = LocalDate.parse(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString(getString(R.string.birthdateKey), "1994"));
+					SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    LocalDate birthdate = LocalDate.parse(pref.getString(getString(R.string.birthdateKey), "1994"));
 
                     float percentDead = ((float)Days.daysBetween(birthdate, new LocalDate()).getDays()) /
-							((float)Days.daysBetween(birthdate, birthdate.plusYears(Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString(getString(R.string.expectancyKey), "85")))).getDays());
+							((float)Days.daysBetween(birthdate, birthdate.plusYears(Integer.parseInt(pref.getString(getString(R.string.expectancyKey), "85")))).getDays());
 
 					Paint paint = new Paint();
                     paint.setStyle(Paint.Style.FILL);
 
-					paint.setColor(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getInt(getString(R.string.bgColorKey), Color.BLUE));
+					paint.setColor(pref.getInt(getString(R.string.bgColorKey), Color.BLUE));
 					canvas.drawRect(0, 0, getDesiredMinimumWidth(), getDesiredMinimumHeight(), paint);
 
-                    paint.setColor(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getInt(getString(R.string.fgColorKey), Color.RED));
+                    paint.setColor(pref.getInt(getString(R.string.fgColorKey), Color.BLACK));
                     canvas.drawRect(0, getDesiredMinimumHeight()-(int)(getDesiredMinimumHeight()*percentDead), getDesiredMinimumWidth(), getDesiredMinimumHeight(), paint);
 
-					paint.setTextSize(Float.parseFloat(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString(getString(R.string.textSizeKey), "256")));
-					canvas.drawText(String.format(Locale.US, "%.3f%%",percentDead*100f), 10, getDesiredMinimumHeight()-(int)(getDesiredMinimumHeight()*percentDead)-10, paint);
+					paint.setTextSize(Float.parseFloat(pref.getString(getString(R.string.textSizeKey), "256")));
+					canvas.drawText(String.format(Locale.US, "%."+pref.getString(getString(R.string.decimalsKey), "3")+"f%%",percentDead*100f), 10, getDesiredMinimumHeight()-(int)(getDesiredMinimumHeight()*percentDead)-10, paint);
 				}
 			} finally {
 				if (canvas != null) {
