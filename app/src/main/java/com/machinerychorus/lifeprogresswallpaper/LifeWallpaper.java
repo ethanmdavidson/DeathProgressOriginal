@@ -16,6 +16,8 @@ import org.joda.time.LocalDate;
 import java.util.Locale;
 
 public class LifeWallpaper extends WallpaperService {
+	//only draw every 24 hours, because we only keep dates to day precision anyway
+	private static final int MIN_TIME_BETWEEN_DRAWS_MS = 86400000;
 
 	public LifeWallpaper() {
 	}
@@ -28,6 +30,7 @@ public class LifeWallpaper extends WallpaperService {
 	}
 
 	private class WallpaperEngine extends Engine implements SharedPreferences.OnSharedPreferenceChangeListener {
+		private long lastDrawTime;
 
 		WallpaperEngine(){
             setOffsetNotificationsEnabled(false);
@@ -55,6 +58,15 @@ public class LifeWallpaper extends WallpaperService {
 			drawFrame();
 		}
 
+		@Override
+		public void onVisibilityChanged(boolean visible){
+			//only check the time between draws here, because in all other events we want
+			//it to redraw every time
+			if(visible && System.currentTimeMillis() - lastDrawTime > MIN_TIME_BETWEEN_DRAWS_MS){
+				drawFrame();
+			}
+		}
+
 		void drawFrame()
 		{
 			Canvas canvas = null;
@@ -79,6 +91,7 @@ public class LifeWallpaper extends WallpaperService {
 					paint.setTextSize(Float.parseFloat(pref.getString(getString(R.string.textSizeKey), "256")));
 					canvas.drawText(String.format(Locale.US, "%."+pref.getString(getString(R.string.decimalsKey), "3")+"f%%",percentDead*100f), 10, getDesiredMinimumHeight()-(int)(getDesiredMinimumHeight()*percentDead)-10, paint);
 				}
+				lastDrawTime = System.currentTimeMillis();
 			} finally {
 				if (canvas != null) {
 					getSurfaceHolder().unlockCanvasAndPost(canvas);
