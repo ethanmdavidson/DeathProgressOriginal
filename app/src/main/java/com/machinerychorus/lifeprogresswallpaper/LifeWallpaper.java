@@ -25,10 +25,11 @@ public class LifeWallpaper extends WallpaperService {
 	public Engine onCreateEngine() {
 		context = this;
 		JodaTimeAndroid.init(context);
+
 		return new WallpaperEngine();
 	}
 
-	public class WallpaperEngine extends Engine{
+	public class WallpaperEngine extends Engine {
 
 		@Override
 		public void onSurfaceCreated(SurfaceHolder holder) {
@@ -36,7 +37,6 @@ public class LifeWallpaper extends WallpaperService {
 			drawFrame();
 		}
 
-		//called when surface destroyed
 		@Override
 		public void onSurfaceDestroyed(SurfaceHolder holder) {
 			super.onSurfaceDestroyed(holder);
