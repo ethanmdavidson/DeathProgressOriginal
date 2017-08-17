@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DeathProgressWallpaper</string>
+    <string name="app_name">Life Perspective</string>
     <string name="title_activity_settings">Death Progress</string>
     <string name="birthdateKey">birthdate</string>
     <string name="bgColorKey">bgColor</string>
