@@ -11,7 +11,7 @@
         android:title="Life Expectancy"
         android:defaultValue="85"/>
     <com.jrummyapps.android.colorpicker.ColorPreference
-        android:defaultValue="@color/orangeLikeASpoopyPumpkin"
+        android:defaultValue="@color/wholesomeTeal"
         android:title="Background Color"
         android:key="@string/bgColorKey" />
     <com.jrummyapps.android.colorpicker.ColorPreference

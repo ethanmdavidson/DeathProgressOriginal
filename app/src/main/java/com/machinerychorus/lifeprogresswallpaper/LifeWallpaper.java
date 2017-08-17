@@ -84,7 +84,7 @@ public class LifeWallpaper extends WallpaperService {
 					Paint paint = new Paint();
                     paint.setStyle(Paint.Style.FILL);
 
-					paint.setColor(pref.getInt(getString(R.string.bgColorKey), getColor(R.color.orangeLikeASpoopyPumpkin)));
+					paint.setColor(pref.getInt(getString(R.string.bgColorKey), getColor(R.color.wholesomeTeal)));
 					canvas.drawRect(0, 0, getDesiredMinimumWidth(), getDesiredMinimumHeight(), paint);
 
                     paint.setColor(pref.getInt(getString(R.string.fgColorKey), getColor(R.color.blackAsMySOUUUUUUUULLLL)));
