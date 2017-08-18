@@ -15,7 +15,7 @@
             android:name=".LifeWallpaper"
             android:enabled="true"
             android:exported="true"
-            android:label="Death Progress"
+            android:label="@string/app_name"
             android:permission="android.permission.BIND_WALLPAPER">
             <intent-filter>
                 <action android:name="android.service.wallpaper.WallpaperService"/>
