@@ -2,7 +2,15 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+        <item name="android:dialogTheme">@style/MyDialogTheme</item>
+        <item name="android:datePickerStyle">@style/MyDatePicker</item>
     </style>
 
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Dialog">
+        <item name="android:datePickerStyle">@style/MyDatePicker</item>
+    </style>
+
+    <style name="MyDatePicker" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:calendarViewShown">false</item>
+    </style>
 </resources>

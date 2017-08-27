@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.preference.PreferenceManager;
 import android.service.wallpaper.WallpaperService;
+import android.support.v4.content.ContextCompat;
 import android.view.SurfaceHolder;
 
 import net.danlew.android.joda.JodaTimeAndroid;
@@ -83,10 +84,10 @@ public class LifeWallpaper extends WallpaperService {
 					Paint paint = new Paint();
                     paint.setStyle(Paint.Style.FILL);
 
-					paint.setColor(pref.getInt(getString(R.string.bgColorKey), getColor(R.color.wholesomeTeal)));
+					paint.setColor(pref.getInt(getString(R.string.bgColorKey), ContextCompat.getColor(getApplicationContext(), R.color.wholesomeTeal)));
 					canvas.drawRect(0, 0, getDesiredMinimumWidth(), getDesiredMinimumHeight(), paint);
 
-                    paint.setColor(pref.getInt(getString(R.string.fgColorKey), getColor(R.color.blackAsMySOUUUUUUUULLLL)));
+                    paint.setColor(pref.getInt(getString(R.string.fgColorKey), ContextCompat.getColor(getApplicationContext(), R.color.blackAsMySOUUUUUUUULLLL)));
                     canvas.drawRect(0, getDesiredMinimumHeight()-(int)(getDesiredMinimumHeight()*percentDead), getDesiredMinimumWidth(), getDesiredMinimumHeight(), paint);
 
 					paint.setTextSize(Float.parseFloat(pref.getString(getString(R.string.textSizeKey), "240")));
