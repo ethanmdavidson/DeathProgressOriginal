@@ -6,7 +6,10 @@
     <string name="bgColorKey">bgColor</string>
     <string name="fgColorKey">fgColor</string>
     <string name="expectancyKey">expectancy</string>
-    <string name="textSizeKey">textSize</string>
+    <string name="progressFontSizeKey">progressFontSize</string>
     <string name="decimalsKey">decimals</string>
     <string name="setWallpaperButtonName">Change Wallpaper</string>
+    <string name="goalsKey">goals</string>
+    <string name="goalsFontSizeKey">goalsFontSize</string>
+    <string name="statusBarHeightKey">statusBarHeight</string>
 </resources>

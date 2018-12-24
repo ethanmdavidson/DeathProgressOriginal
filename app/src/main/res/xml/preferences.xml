@@ -19,11 +19,19 @@
         android:title="Foreground Color"
         android:key="@string/fgColorKey" />
     <com.machinerychorus.lifeprogresswallpaper.IntegerPreference
-        android:key="@string/textSizeKey"
-        android:title="Text Size"
+        android:key="@string/progressFontSizeKey"
+        android:title="Progress Font Size"
         android:defaultValue="240"/>
     <com.machinerychorus.lifeprogresswallpaper.IntegerPreference
         android:key="@string/decimalsKey"
         android:title="Decimal Places"
         android:defaultValue="4"/>
+    <EditTextPreference
+        android:key="@string/goalsKey"
+        android:title="Goals"
+        android:hint="Enter your goals, reminders, motivations, etc. here"/>
+    <com.machinerychorus.lifeprogresswallpaper.IntegerPreference
+        android:key="@string/goalsFontSizeKey"
+        android:title="Goals Font Size"
+        android:defaultValue="75"/>
 </PreferenceScreen>
