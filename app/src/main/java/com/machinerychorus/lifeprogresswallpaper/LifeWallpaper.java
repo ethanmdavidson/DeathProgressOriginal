@@ -3,19 +3,16 @@ package com.machinerychorus.lifeprogresswallpaper;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.preference.PreferenceManager;
 import android.service.wallpaper.WallpaperService;
 import android.support.v4.content.ContextCompat;
 import android.view.SurfaceHolder;
-import android.view.Window;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
 import org.joda.time.DateTime;
 import org.joda.time.Hours;
 
-import java.util.List;
 import java.util.Locale;
 
 public class LifeWallpaper extends WallpaperService {
