@@ -40,6 +40,12 @@ public class LifeWallpaper extends WallpaperService {
 		}
 
 		@Override
+		public void onDestroy(){
+			//remove preference listener
+			PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).unregisterOnSharedPreferenceChangeListener(this);
+		}
+
+		@Override
 		public void onSurfaceCreated(SurfaceHolder holder) {
 			super.onSurfaceCreated(holder);
 			drawFrame();
