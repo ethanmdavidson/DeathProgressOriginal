@@ -77,6 +77,10 @@ public class LifeWallpaper extends WallpaperService {
 				if (canvas != null) {
 					SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 					DateTime birthdate = DateTime.parse(pref.getString(getString(R.string.birthdateKey), "1994"));
+					//get screen width/height from surface because getDesiredMinimumWidth()/Height()
+					// doesn't always return the correct values (e.g. 1280x800 tablet returned 1920x1280)
+					int screenWidth = getSurfaceHolder().getSurfaceFrame().right;
+					int screenHeight = getSurfaceHolder().getSurfaceFrame().bottom;
 
 					float hoursAlive = (float) Hours.hoursBetween(birthdate, new DateTime()).getHours();
 					int yearsExpectancy = Integer.parseInt(pref.getString(getString(R.string.expectancyKey), "85"));
@@ -88,15 +92,16 @@ public class LifeWallpaper extends WallpaperService {
 					paint.setStyle(Paint.Style.FILL);
 
 					paint.setColor(pref.getInt(getString(R.string.bgColorKey), ContextCompat.getColor(getApplicationContext(), R.color.wholesomeTeal)));
-					canvas.drawRect(0, 0, getDesiredMinimumWidth(), getDesiredMinimumHeight(), paint);
+					canvas.drawRect(0, 0, screenWidth, screenHeight, paint);
 
 					paint.setColor(pref.getInt(getString(R.string.fgColorKey), ContextCompat.getColor(getApplicationContext(), R.color.blackAsMySOUUUUUUUULLLL)));
-					canvas.drawRect(0, getDesiredMinimumHeight()-(int)(getDesiredMinimumHeight()*percentDead),
-                            getDesiredMinimumWidth(), getDesiredMinimumHeight(), paint);
+					canvas.drawRect(0, screenHeight-(int)(screenHeight*percentDead),
+                            screenWidth, screenHeight, paint);
 
 					paint.setTextSize(Float.parseFloat(pref.getString(getString(R.string.progressFontSizeKey), "240")));
-					String progressLabel = String.format(Locale.US, "%."+pref.getString(getString(R.string.decimalsKey), "4")+"f%%",percentDead*100f);
-					canvas.drawText(progressLabel, 10, getDesiredMinimumHeight()-(int)(getDesiredMinimumHeight()*percentDead)-10, paint);
+					String progressLabel = String.format(Locale.US,
+							"%."+pref.getString(getString(R.string.decimalsKey), "4")+"f%%",percentDead*100f);
+					canvas.drawText(progressLabel, 10, screenHeight-(int)(screenHeight*percentDead)-10, paint);
 
 					//draw goals text
 					int statusBarHeight = pref.getInt(getString(R.string.statusBarHeightKey), 100);
