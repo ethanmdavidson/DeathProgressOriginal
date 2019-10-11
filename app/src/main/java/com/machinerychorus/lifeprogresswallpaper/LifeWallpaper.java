@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.preference.PreferenceManager;
 import android.service.wallpaper.WallpaperService;
-import android.support.v4.content.ContextCompat;
 import android.view.SurfaceHolder;
 
 import net.danlew.android.joda.JodaTimeAndroid;
@@ -14,6 +13,8 @@ import org.joda.time.DateTime;
 import org.joda.time.Hours;
 
 import java.util.Locale;
+
+import androidx.core.content.ContextCompat;
 
 public class LifeWallpaper extends WallpaperService {
 	//only draw every hour, in order to keep battery usage down.

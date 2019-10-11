@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
         android:title="@string/app_pref_header"/>
     <com.machinerychorus.lifeprogresswallpaper.DatePickerPreference
@@ -10,11 +10,11 @@
         android:key="@string/expectancyKey"
         android:title="Life Expectancy"
         android:defaultValue="85"/>
-    <com.jrummyapps.android.colorpicker.ColorPreference
+    <com.jaredrummler.android.colorpicker.ColorPreference
         android:defaultValue="@color/wholesomeTeal"
         android:title="Background Color"
         android:key="@string/bgColorKey" />
-    <com.jrummyapps.android.colorpicker.ColorPreference
+    <com.jaredrummler.android.colorpicker.ColorPreference
         android:defaultValue="@color/blackAsMySOUUUUUUUULLLL"
         android:title="Foreground Color"
         android:key="@string/fgColorKey" />
@@ -34,4 +34,4 @@
         android:key="@string/goalsFontSizeKey"
         android:title="Goals Font Size"
         android:defaultValue="75"/>
-</PreferenceScreen>
+</androidx.preference.PreferenceScreen>

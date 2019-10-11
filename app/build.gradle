@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "com.machinerychorus.lifeprogresswallpaper"
         minSdkVersion 16
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 7
         versionName "1.6"
         vectorDrawables.useSupportLibrary = true
@@ -29,6 +29,6 @@ dependencies {
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation 'net.danlew:android.joda:2.9.9'
-    implementation 'com.jrummyapps:colorpicker:2.1.6'
+    implementation 'net.danlew:android.joda:2.10.1.1'
+    implementation 'com.jaredrummler:colorpicker:1.1.0'
 }

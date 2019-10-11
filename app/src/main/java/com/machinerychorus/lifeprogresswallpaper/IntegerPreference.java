@@ -1,8 +1,8 @@
 package com.machinerychorus.lifeprogresswallpaper;
 
 import android.content.Context;
-import android.preference.EditTextPreference;
-import android.util.AttributeSet;
+import androidx.preference.EditTextPreference;
+
 import android.widget.Toast;
 
 /**
@@ -17,10 +17,6 @@ public class IntegerPreference extends EditTextPreference {
         super(context);
     }
 
-    public IntegerPreference(Context context, AttributeSet attributeSet){
-        super(context, attributeSet);
-    }
-
     @Override
     public void setText(String text){
         boolean isValid = false;
@@ -28,7 +24,7 @@ public class IntegerPreference extends EditTextPreference {
             if(Integer.parseInt(text) >= 0){
                 isValid = true;
             }
-        } catch (NumberFormatException e){}
+        } catch (NumberFormatException ignored){}
 
         if(isValid){
             super.setText(text);

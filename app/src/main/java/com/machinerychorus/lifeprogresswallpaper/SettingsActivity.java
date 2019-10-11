@@ -14,13 +14,17 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import androidx.fragment.app.DialogFragment;
+import androidx.preference.Preference;
+
 public class SettingsActivity extends PreferenceActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.preferences);
+        getFragmentManager().beginTransaction().replace(android.R.id.content,
+                new SettingsFragment()).commit();
 
         ListView v = getListView();
         Button setWallpaperButton = new Button(this);
@@ -67,5 +71,27 @@ public class SettingsActivity extends PreferenceActivity {
      */
     protected boolean isValidFragment(String fragmentName) {
         return PreferenceFragment.class.getName().equals(fragmentName);
+    }
+
+    public static class SettingsFragment extends androidx.preference.PreferenceFragment {
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            setPreferencesFromResource(R.xml.preferences, rootKey);
+        }
+
+        @Override
+        public void onDisplayPreferenceDialog(Preference preference) {
+            if (getFragmentManager().findFragmentByTag(DIALOG_FRAGMENT_TAG) != null) {
+                return;
+            }
+
+            if (preference instanceof DatePickerPreference) {
+                final DialogFragment f = CustomDialog.newInstance(preference.getKey());
+                f.setTargetFragment(this, 0);
+                f.show(getFragmentManager(), DIALOG_FRAGMENT_TAG);
+            } else {
+                super.onDisplayPreferenceDialog(preference);
+            }
+        }
     }
 }
