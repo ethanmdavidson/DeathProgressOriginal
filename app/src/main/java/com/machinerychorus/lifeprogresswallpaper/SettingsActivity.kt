@@ -1,47 +1,43 @@
-package com.machinerychorus.lifeprogresswallpaper;
+package com.machinerychorus.lifeprogresswallpaper
 
-import android.app.WallpaperManager;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Build;
-import android.os.Bundle;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
-import android.view.View;
-import android.widget.AbsListView;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ListView;
+import android.preference.PreferenceActivity
+import android.os.Bundle
+import com.machinerychorus.lifeprogresswallpaper.R
+import android.widget.AbsListView
+import android.widget.LinearLayout
+import android.os.Build
+import android.content.Intent
+import android.app.WallpaperManager
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
+import android.widget.Button
+import androidx.fragment.app.DialogFragment
+import androidx.preference.Preference
+import androidx.preference.PreferenceFragment
 
-import androidx.fragment.app.DialogFragment;
-import androidx.preference.Preference;
-
-public class SettingsActivity extends PreferenceActivity {
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        getFragmentManager().beginTransaction().replace(android.R.id.content,
-                new SettingsFragment()).commit();
-
-        ListView v = getListView();
-        Button setWallpaperButton = new Button(this);
-        setWallpaperButton.setText(R.string.setWallpaperButtonName);
-        setWallpaperButton.setLayoutParams(new AbsListView.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, AbsListView.LayoutParams.MATCH_PARENT));
+class SettingsActivity : PreferenceActivity() {
+    public override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        fragmentManager.beginTransaction().replace(
+            android.R.id.content,
+            SettingsFragment()
+        ).commit()
+        val v = listView
+        val setWallpaperButton = Button(this)
+        setWallpaperButton.setText(R.string.setWallpaperButtonName)
+        setWallpaperButton.layoutParams = AbsListView.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            AbsListView.LayoutParams.MATCH_PARENT
+        )
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            setWallpaperButton.setLayoutDirection(AbsListView.LAYOUT_DIRECTION_RTL);
+            setWallpaperButton.layoutDirection = AbsListView.LAYOUT_DIRECTION_RTL
         }
-        setWallpaperButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setAction(WallpaperManager.ACTION_LIVE_WALLPAPER_CHOOSER);
-                startActivity(intent);
-            }
-        });
-        v.addHeaderView(setWallpaperButton);
+        setWallpaperButton.setOnClickListener {
+            val intent = Intent()
+            intent.action = WallpaperManager.ACTION_LIVE_WALLPAPER_CHOOSER
+            startActivity(intent)
+        }
+        v.addHeaderView(setWallpaperButton)
 
         /*
         The wallpaper service needs to know the height of the notification bar so
@@ -56,41 +52,40 @@ public class SettingsActivity extends PreferenceActivity {
         We default to 100 so that it (hopefully) won't be covered by the stats bar,
         even if we don't get the real height.
         */
-        int statusBarHeight = 100;
-        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        var statusBarHeight = 100
+        val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
         if (resourceId > 0) {
-            statusBarHeight = getResources().getDimensionPixelSize(resourceId);
+            statusBarHeight = resources.getDimensionPixelSize(resourceId)
         }
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        pref.edit().putInt(getString(R.string.statusBarHeightKey), statusBarHeight).apply();
+        val pref = PreferenceManager.getDefaultSharedPreferences(
+            applicationContext
+        )
+        pref.edit().putInt(getString(R.string.statusBarHeightKey), statusBarHeight).apply()
     }
 
     /**
      * This method stops fragment injection in malicious applications.
      * Make sure to deny any unknown fragments here.
      */
-    protected boolean isValidFragment(String fragmentName) {
-        return PreferenceFragment.class.getName().equals(fragmentName);
+    override fun isValidFragment(fragmentName: String): Boolean {
+        return android.preference.PreferenceFragment::class.java.name == fragmentName
     }
 
-    public static class SettingsFragment extends androidx.preference.PreferenceFragment {
-        @Override
-        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-            setPreferencesFromResource(R.xml.preferences, rootKey);
+    class SettingsFragment : PreferenceFragment() {
+        override fun onCreatePreferences(savedInstanceState: Bundle, rootKey: String) {
+            setPreferencesFromResource(R.xml.preferences, rootKey)
         }
 
-        @Override
-        public void onDisplayPreferenceDialog(Preference preference) {
-            if (getFragmentManager().findFragmentByTag(DIALOG_FRAGMENT_TAG) != null) {
-                return;
+        override fun onDisplayPreferenceDialog(preference: Preference) {
+            if (fragmentManager.findFragmentByTag(DIALOG_FRAGMENT_TAG) != null) {
+                return
             }
-
-            if (preference instanceof DatePickerPreference) {
-                final DialogFragment f = CustomDialog.newInstance(preference.getKey());
-                f.setTargetFragment(this, 0);
-                f.show(getFragmentManager(), DIALOG_FRAGMENT_TAG);
+            if (preference is com.machinerychorus.lifeprogresswallpaper.DatePickerPreference) {
+                val f: DialogFragment = CustomDialog.newInstance(preference.key)
+                f.setTargetFragment(this, 0)
+                f.show(fragmentManager, DIALOG_FRAGMENT_TAG)
             } else {
-                super.onDisplayPreferenceDialog(preference);
+                super.onDisplayPreferenceDialog(preference)
             }
         }
     }

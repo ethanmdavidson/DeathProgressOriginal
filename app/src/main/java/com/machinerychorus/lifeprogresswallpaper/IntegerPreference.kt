@@ -1,37 +1,33 @@
-package com.machinerychorus.lifeprogresswallpaper;
+package com.machinerychorus.lifeprogresswallpaper
 
-import android.content.Context;
-import androidx.preference.EditTextPreference;
-
-import android.widget.Toast;
+import android.content.Context
+import android.widget.Toast
+import androidx.preference.EditTextPreference
 
 /**
  * A custom preference object. Works the same as a normal EditTextPreference, but only allows
  * integer input
  * Created by Ethan on 3/2/2017.
  */
-
-public class IntegerPreference extends EditTextPreference {
-
-    public IntegerPreference(Context context) {
-        super(context);
-    }
-
-    @Override
-    public void setText(String text){
-        boolean isValid = false;
+class IntegerPreference(context: Context?) : EditTextPreference(context) {
+    override fun setText(text: String) {
+        var isValid = false
         try {
-            if(Integer.parseInt(text) >= 0){
-                isValid = true;
+            if (text.toInt() >= 0) {
+                isValid = true
             }
-        } catch (NumberFormatException ignored){}
-
-        if(isValid){
-            super.setText(text);
+        } catch (ignored: NumberFormatException) {
+        }
+        if (isValid) {
+            super.setText(text)
         } else {
             //alert user that it wasn't changed
-            Toast toast = Toast.makeText(getContext(), "Only positive numbers are allowed in this field", Toast.LENGTH_SHORT);
-            toast.show();
+            val toast = Toast.makeText(
+                context,
+                "Only positive numbers are allowed in this field",
+                Toast.LENGTH_SHORT
+            )
+            toast.show()
         }
     }
 }
