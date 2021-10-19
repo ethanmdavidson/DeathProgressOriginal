@@ -2,8 +2,6 @@
 
 > :warning: **This version is deprecated in favor of the kotlin rewrite** which can be found at https://github.com/ethanmdavidson/DeathProgress
 > 
-> The new version only supports Android 8.0+, while this version works with 4.1+.
-> 
 > If you want to continue using this version, the apk is in this repo ([file 1.6.apk](https://raw.githubusercontent.com/ethanmdavidson/DeathProgressOriginal/master/1.6.apk)),
 > or you can build it from the [v1.6 tag](https://github.com/ethanmdavidson/DeathProgressOriginal/releases/tag/v1.6)
 
